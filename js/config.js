@@ -1,4 +1,4 @@
-// config.js — shared constants for the "Decanting the Web" visualization.
+// config.js: shared constants for the "Decanting the Web" visualization.
 // One source of truth for colours, fonts and layout so the charts stay coherent.
 
 export const COLOR = {

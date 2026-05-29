@@ -1,4 +1,4 @@
-// distribution.js — how long is a web document? Token-count histogram with a
+// distribution.js: how long is a web document? Token-count histogram with a
 // linear↔log toggle. Scroll drives the narrative (linear → median → log → long tail);
 // the user can also flip the scale manually with the buttons. Hover a bar for counts.
 
@@ -64,8 +64,8 @@ export function createDistribution(container, data) {
         .attr("fill", COLOR.blue)
         .on("mousemove", (e, bd) => {
           const lbl = mode === "log"
-            ? `${fmtCompact(bd.x0)}–${fmtCompact(bd.x1)} tokens`
-            : `${Math.round(bd.x0)}–${Math.round(bd.x1)} tokens`;
+            ? `${fmtCompact(bd.x0)}-${fmtCompact(bd.x1)} tokens`
+            : `${Math.round(bd.x0)}-${Math.round(bd.x1)} tokens`;
           tip.show(`<b>${lbl}</b><div class="t-row"><span>documents</span><b>${fmtInt(bd.c)}</b></div>`, e);
         })
         .on("mouseleave", () => tip.hide()),

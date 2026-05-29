@@ -1,4 +1,4 @@
-// scroller.js — a tiny scrollytelling controller built on IntersectionObserver.
+// scroller.js: a tiny scrollytelling controller built on IntersectionObserver.
 // No external dependency. Two pieces:
 //   1. setupScroller(onActivate): fires when a `.step` crosses the viewport centre,
 //      reporting which chart it belongs to and the step index.

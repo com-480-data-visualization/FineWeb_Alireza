@@ -1,4 +1,4 @@
-// language.js — "Is it really English?" The fastText language-score histogram.
+// language.js: "Is it really English?" The fastText language-score histogram.
 // Mass piles up near 1.0; a hard filter sits at 0.65. Scroll highlights the
 // confident spike, then the murky tail (code-heavy / multilingual / borderline pages).
 
@@ -37,7 +37,7 @@ export function createLanguage(container, data) {
     bars.join(
       (enter) => enter.append("rect")
         .on("mousemove", (e, bd) =>
-          tip.show(`<b>score ${bd.x0.toFixed(3)}–${bd.x1.toFixed(3)}</b>
+          tip.show(`<b>score ${bd.x0.toFixed(3)}-${bd.x1.toFixed(3)}</b>
             <div class="t-row"><span>documents</span><b>${fmtInt(bd.c)}</b></div>`, e))
         .on("mouseleave", () => tip.hide()),
       (u) => u, (ex) => ex.remove()

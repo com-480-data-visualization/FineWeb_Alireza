@@ -1,4 +1,4 @@
-// utils.js — small shared helpers: data loading, number formatting, a tooltip
+// utils.js: small shared helpers: data loading, number formatting, a tooltip
 // singleton, a responsive-redraw hook, and a debounce. No framework, just D3 + DOM.
 
 /** Fetch + parse a JSON file from /data, with a helpful error. */
@@ -38,7 +38,7 @@ export const fmtPct0 = d3.format(".0%");
 
 /** Compact token/count formatter: 1_234_567 → "1.2M". */
 export function fmtCompact(n) {
-  if (n == null || isNaN(n)) return "–";
+  if (n == null || isNaN(n)) return "n/a";
   const a = Math.abs(n);
   if (a >= 1e12) return (n / 1e12).toFixed(1).replace(/\.0$/, "") + "T";
   if (a >= 1e9) return (n / 1e9).toFixed(1).replace(/\.0$/, "") + "B";

@@ -1,4 +1,4 @@
-// concentration.js — "a few domains rule them all." Two linked views of inequality:
+// concentration.js: "a few domains rule them all." Two linked views of inequality:
 //   • Lorenz curve of documents-per-domain with the Gini coefficient.
 //   • Cumulative token coverage: how few domains it takes to reach 25/50/75/90% of tokens.
 // Scroll moves between them; the user can also toggle. Hover reads off the exact share.

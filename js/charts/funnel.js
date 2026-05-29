@@ -1,4 +1,4 @@
-// funnel.js — the FineWeb curation funnel: 100T raw Common Crawl distilled to 15T.
+// funnel.js: the FineWeb curation funnel: 100T raw Common Crawl distilled to 15T.
 // Scroll reveals each filtering stage; the taper shows how much survives. Hovering a
 // stage explains what it removes. This is the data-story's signature visual.
 

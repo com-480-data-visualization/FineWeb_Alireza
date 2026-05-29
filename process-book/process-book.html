@@ -83,14 +83,14 @@
   </div>
 
   <h2><span class="n">01</span>The idea, and who it is for</h2>
-  <p class="lead">Every large language model is what it eats. Before a model can write, it must read —
+  <p class="lead">Every large language model is what it eats. Before a model can write, it must read,
   and most of what it reads comes from web datasets like <strong>FineWeb</strong>. Yet for most people the
   training data of AI is a black box: enormous, abstract, invisible. Our goal was to make that black box
-  <em>tangible</em> — to let a curious, non-expert reader <em>see</em> the web being distilled into the text a
+  <em>tangible</em>: to let a curious, non-expert reader <em>see</em> the web being distilled into the text a
   model learns from.</p>
 
   <p>We chose a single, guided <strong>scrollytelling narrative</strong> rather than a dashboard. The dataset is
-  rich, but our audience is not data engineers — it is the ML-curious public, students, and anyone who has
+  rich, but our audience is not data engineers, but the ML-curious public, students, and anyone who has
   wondered "where does ChatGPT's knowledge come from?". A linear story lets us build one insight on top of the
   next, while still allowing free exploration through controls inside each chart.</p>
 
@@ -117,16 +117,16 @@
   </div>
 
   <p class="muted" style="margin-top:10px">This process book describes how we went from those questions and our
-  first paper sketches to the final interactive product — the design decisions, the dead-ends, and who did what.</p>
+  first paper sketches to the final interactive product: the design decisions, the dead-ends, and who did what.</p>
 
-  <div class="foot"><span>Decanting the Web — Process Book</span><span>Page 1 / 8</span></div>
+  <div class="foot"><span>Decanting the Web · Process Book</span><span>Page 1 / 8</span></div>
 </section>
 
 <!-- ═══════════════════════ PAGE 2 ═══════════════════════ -->
 <section class="page">
   <h2><span class="n">03</span>From Milestone 1 sketches to the final design</h2>
   <p>Our Milestone-1 proposal contained two competing concepts. The first was a classic
-  <strong>multi-view dashboard</strong> — every EDA figure on one screen. The second was a
+  <strong>multi-view dashboard</strong>: every EDA figure on one screen. The second was a
   <strong>guided story</strong> built around the curation funnel. We sketched both.</p>
 
   <div class="cols">
@@ -148,7 +148,7 @@
           <line x1="172" y1="135" x2="302" y2="135"/><line x1="172" y1="150" x2="302" y2="150"/><line x1="172" y1="165" x2="302" y2="165"/>
         </g>
       </svg>
-      <figcaption><span class="tag">M1 sketch A</span> &nbsp;Dashboard — all EDA views at once</figcaption>
+      <figcaption><span class="tag">M1 sketch A</span> &nbsp;Dashboard: all EDA views at once</figcaption>
     </figure>
     <figure>
       <!-- M1 SKETCH B: funnel story concept -->
@@ -163,12 +163,12 @@
         <text x="290" y="104" font-size="8" fill="#d63b3b">−16T</text>
         <text x="150" y="190" font-size="8.5" fill="#5b6b7b" text-anchor="middle">scroll to peel each layer →</text>
       </svg>
-      <figcaption><span class="tag t2">M1 sketch B</span> &nbsp;Story — the curation funnel as a hook</figcaption>
+      <figcaption><span class="tag t2">M1 sketch B</span> &nbsp;Story: the curation funnel as a hook</figcaption>
     </figure>
   </div>
 
   <h3>The decision</h3>
-  <p>We picked <strong>B, and folded A into it</strong>. The funnel was the single most striking idea in the EDA —
+  <p>We picked <strong>B, and folded A into it</strong>. The funnel was the single most striking idea in the EDA:
   it turns an abstract statistic ("85% is discarded") into a physical shape. But we did not want to lose the
   exploratory richness of the dashboard, so each scrolly section embeds the relevant dashboard view as an
   <em>interactive</em>, controllable chart. The reader is guided, but never trapped.</p>
@@ -187,14 +187,14 @@
       <td>Dark canvas suits an "inside the machine" mood and makes colour pop</td></tr>
   </table>
 
-  <div class="foot"><span>Decanting the Web — Process Book</span><span>Page 2 / 8</span></div>
+  <div class="foot"><span>Decanting the Web · Process Book</span><span>Page 2 / 8</span></div>
 </section>
 
 <!-- ═══════════════════════ PAGE 3 ═══════════════════════ -->
 <section class="page">
   <h2><span class="n">04</span>The final information architecture</h2>
   <p>The final site is one continuous scroll. A pinned graphic on the right updates as narrative "steps" pass the
-  centre of the viewport on the left — the canonical scrollytelling pattern. We sketched the layout before
+  centre of the viewport on the left: the canonical scrollytelling pattern. We sketched the layout before
   building it:</p>
 
   <figure>
@@ -202,7 +202,7 @@
       <rect x="10" y="10" width="220" height="170" rx="4" fill="#fbfcfe" stroke="#b9c6d6"/>
       <text x="22" y="28" font-size="9" fill="#5b6b7b">narrative steps (scroll)</text>
       <rect x="22" y="36" width="196" height="34" rx="4" fill="#fff" stroke="#2b62d6"/>
-      <text x="30" y="50" font-size="8" fill="#15202b">▌active step — bold</text>
+      <text x="30" y="50" font-size="8" fill="#15202b">▌active step: bold</text>
       <text x="30" y="62" font-size="7.5" fill="#5b6b7b">explanatory copy…</text>
       <rect x="22" y="78" width="196" height="30" rx="4" fill="#f4f7fb" stroke="#dde5ee"/>
       <text x="30" y="96" font-size="7.5" fill="#9aa8b6">dimmed step</text>
@@ -237,7 +237,7 @@
   orchestrator maps a <code>data-chart</code> attribute to the module and forwards scroll events. This made the
   story re-orderable late in the project without touching chart internals.</p>
 
-  <div class="foot"><span>Decanting the Web — Process Book</span><span>Page 3 / 8</span></div>
+  <div class="foot"><span>Decanting the Web · Process Book</span><span>Page 3 / 8</span></div>
 </section>
 
 <!-- ═══════════════════════ PAGE 4 ═══════════════════════ -->
@@ -264,7 +264,7 @@
         <li><strong>Funnel width = token volume.</strong> A length encoding everyone reads instantly; the taper
         <em>is</em> the message.</li>
         <li><strong>Galaxy: area = volume, colour = category.</strong> Area for magnitude, hue for a categorical
-        attribute — two channels, no overload.</li>
+        attribute: two channels, no overload.</li>
         <li><strong>Log toggle</strong> on the length histogram: the linear view shows "most pages are tiny", the
         log view reveals the log-normal shape. Letting the reader flip it themselves teaches the idea.</li>
         <li><strong>Sequential heat ramp</strong> on the quality grid, on a <code>√</code> scale so the dominant
@@ -278,12 +278,12 @@
 
   <h2><span class="n">06</span>Making it interactive &amp; legible</h2>
   <p>Three rules kept the interactivity honest. <strong>(1) Scroll sets a sensible default; controls let you
-  override</strong> — e.g. the timeline opens on "documents per year" but you can switch to tokens or to all 96
+  override</strong>: for example, the timeline opens on "documents per year" but you can switch to tokens or to all 96
   snapshots. <strong>(2) Hover always explains</strong>, with a single shared tooltip that re-positions to stay
-  on-screen. <strong>(3) Nothing is a dead end</strong> — the domain search, legend filters, and toggles reward
+  on-screen. <strong>(3) Nothing is a dead end</strong>: the domain search, legend filters, and toggles reward
   curiosity after the guided beat has played.</p>
 
-  <div class="foot"><span>Decanting the Web — Process Book</span><span>Page 4 / 8</span></div>
+  <div class="foot"><span>Decanting the Web · Process Book</span><span>Page 4 / 8</span></div>
 </section>
 
 <!-- ═══════════════════════ PAGE 5 ═══════════════════════ -->
@@ -338,7 +338,7 @@
   <span class="pill">IntersectionObserver</span> <span class="pill">ResizeObserver</span>
   <span class="pill">CSS sticky/grid</span> <span class="pill">no build step</span></p>
 
-  <div class="foot"><span>Decanting the Web — Process Book</span><span>Page 5 / 8</span></div>
+  <div class="foot"><span>Decanting the Web · Process Book</span><span>Page 5 / 8</span></div>
 </section>
 
 <!-- ═══════════════════════ PAGE 6 ═══════════════════════ -->
@@ -348,7 +348,7 @@
   <h3>1 · Ten billion tokens will not fit in a browser</h3>
   <p>The dataset is far too large to ship. We resolved this by separating <em>analysis</em> from
   <em>presentation</em>: all heavy lifting happens once in Python and is distilled into small JSON aggregates the
-  browser can load in milliseconds. This also made the site reproducible — re-run one script to refresh the data.</p>
+  browser can load in milliseconds. This also made the site reproducible: re-run one script to refresh the data.</p>
 
   <h3>2 · A self-contained, offline-runnable repository</h3>
   <p>Streaming the live dataset needs network, the <code>datasets</code> library, and several minutes. To keep the
@@ -359,7 +359,7 @@
   <h3>3 · A stable force-directed galaxy</h3>
   <p>Our first bubble layout used a positive many-body force and collapsed to a single point; a negative one
   fought the centering and drifted off-screen. The fix was to drop charge entirely and rely on centering forces
-  plus collision, with position clamping on every tick — a calm, packed cluster that re-settles smoothly when you
+  plus collision, with position clamping on every tick, producing a calm, packed cluster that re-settles smoothly when you
   re-size by tokens.</p>
 
   <h3>4 · Honest histograms</h3>
@@ -372,7 +372,7 @@
   <code>ResizeObserver</code>/window handler drives it. On narrow screens the CSS grid collapses so the graphic
   pins above the narrative instead of beside it.</p>
 
-  <div class="foot"><span>Decanting the Web — Process Book</span><span>Page 6 / 8</span></div>
+  <div class="foot"><span>Decanting the Web · Process Book</span><span>Page 6 / 8</span></div>
 </section>
 
 <!-- ═══════════════════════ PAGE 7 ═══════════════════════ -->
@@ -417,7 +417,7 @@
   card and paper for the curation-pipeline figures. Generative-AI assistance, where used, was limited to
   boilerplate and is reviewed and owned by the team.</p>
 
-  <div class="foot"><span>Decanting the Web — Process Book</span><span>Page 7 / 8</span></div>
+  <div class="foot"><span>Decanting the Web · Process Book</span><span>Page 7 / 8</span></div>
 </section>
 
 <!-- ═══════════════════════ PAGE 8 ═══════════════════════ -->
@@ -468,7 +468,7 @@
     <tr><td>Milestone-1 EDA</td><td><code>FineWeb_EDA.ipynb</code></td></tr>
   </table>
 
-  <div class="foot"><span>Decanting the Web — Process Book · COM-480 EPFL</span><span>Page 8 / 8</span></div>
+  <div class="foot"><span>Decanting the Web · Process Book · COM-480 EPFL</span><span>Page 8 / 8</span></div>
 </section>
 
 </body>

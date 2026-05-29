@@ -261,7 +261,7 @@ def main():
     # ---- token-count histogram (linear + log) ------------------------------- #
     lin_max = 3000
     lin_edges = np.linspace(0, lin_max, 61)
-    # NB: do NOT clip — np.histogram ignores values above the top edge, so the long
+    # NB: do NOT clip, because np.histogram ignores values above the top edge, so the long
     # tail is simply truncated from the linear view (no false spike at the last bin).
     lin_counts, _ = np.histogram(tok, bins=lin_edges)
     log_edges = np.logspace(0, np.log10(tok.max()), 61)

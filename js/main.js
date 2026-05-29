@@ -1,4 +1,4 @@
-// main.js — orchestrator. Loads the aggregates, fills the narrative stat slots,
+// main.js: orchestrator. Loads the aggregates, fills the narrative stat slots,
 // mounts each chart into its sticky container, and wires scroll → chart.update(step).
 
 import { loadAll, fmtInt, fmtCompact, fmtPct, debounce } from "./utils.js";
@@ -121,7 +121,7 @@ async function init() {
   } catch (err) {
     console.error(err);
     if (loader) loader.innerHTML = `<div class="loader-err">Could not load the data.<br>
-      <span>Serve the folder over HTTP (see README) — opening index.html directly will block fetch().</span><br>
+      <span>Serve the folder over HTTP (see README): opening index.html directly will block fetch().</span><br>
       <code>${err.message}</code></div>`;
   }
 }

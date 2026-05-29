@@ -1,4 +1,4 @@
-// quality.js — the quality landscape: a 2-D heatmap of language score × token count.
+// quality.js: the quality landscape: a 2-D heatmap of language score × token count.
 // Where do FineWeb's documents actually live? Scroll spotlights the dominant cell
 // (confident, medium-length prose) and the short-document row where the classifier
 // is least sure. Hover any cell for its exact count.

@@ -1,4 +1,4 @@
-// temporal.js — the web through time. Documents/tokens/length across crawl years,
+// temporal.js: the web through time. Documents/tokens/length across crawl years,
 // with an optional zoom to all ~96 Common-Crawl snapshots. Scroll switches the metric;
 // buttons let the reader explore freely. Recent years dominate the dataset.
 

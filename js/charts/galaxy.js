@@ -1,4 +1,4 @@
-// galaxy.js — the Domain Galaxy. Every bubble is one of the most-crawled domains,
+// galaxy.js: the Domain Galaxy. Every bubble is one of the most-crawled domains,
 // sized by volume and coloured by what kind of site it is. Force-packed so it reads
 // like a star field. Fully explorable: search to spotlight a domain, click a legend
 // swatch to isolate a category, toggle whether size means documents or tokens.

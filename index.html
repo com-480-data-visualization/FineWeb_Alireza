@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Decanting the Web · Inside FineWeb</title>
-  <meta name="description" content="An interactive data story about FineWeb — how 100 trillion tokens of raw web text are distilled into 15 trillion tokens of LLM training data. COM-480 Data Visualization, EPFL." />
+  <meta name="description" content="An interactive data story about FineWeb: how 100 trillion tokens of raw web text are distilled into 15 trillion tokens of LLM training data. COM-480 Data Visualization, EPFL." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -42,7 +42,7 @@
       <h1>Decanting<br><span class="accent">the Web</span></h1>
       <p class="hero-lead">
         Every large language model is what it eats. Before a model can write, it must
-        read — and most of what it reads comes from <b>FineWeb</b>, a dataset distilled
+        read, and most of what it reads comes from <b>FineWeb</b>, a dataset distilled
         from fifteen years of crawling the open internet.
       </p>
       <div class="hero-stat">
@@ -67,14 +67,14 @@
       <p>
         We explored the public <code>sample-10BT</code> subset by streaming
         <b><span data-stat="sample_docs">200,000</span> documents</b> and measuring them.
-        This is the story those measurements tell — from the raw crawl, through the
+        This is the story those measurements tell, from the raw crawl, through the
         filtering funnel, to the shape of what survives.
       </p>
       <div class="stat-strip">
         <div><b data-stat="sample_docs">200,000</b><span>documents sampled</span></div>
         <div><b data-stat="n_dumps">96</b><span>Common-Crawl snapshots</span></div>
         <div><b data-stat="n_unique_domains">70,000</b><span>unique domains</span></div>
-        <div><b><span data-stat="year_min">2013</span>–<span data-stat="year_max">2024</span></b><span>years of the web</span></div>
+        <div><b><span data-stat="year_min">2013</span> to <span data-stat="year_max">2024</span></b><span>years of the web</span></div>
       </div>
       <p class="hint">Scroll to begin ↓</p>
     </div>
@@ -86,7 +86,7 @@
       <div class="section-tag"><span class="num">01</span> The Funnel</div>
       <div class="step" data-step="0"><div class="step-inner">
         <h3>It begins with the whole web</h3>
-        <p>Common Crawl has archived the public internet since 2013 — <b data-stat="n_dumps">96</b>
+        <p>Common Crawl has archived the public internet since 2013: <b data-stat="n_dumps">96</b>
         monthly snapshots of raw HTML in every language. That's roughly
         <b data-stat="raw_tokens">100T</b> tokens of unfiltered noise.</p>
       </div></div>
@@ -103,7 +103,7 @@
       <div class="step" data-step="3"><div class="step-inner">
         <h3>Remove the duplicates</h3>
         <p>The web repeats itself endlessly. Per-snapshot <b>MinHash</b> de-duplication is the
-        single biggest cut — collapsing near-identical pages.</p>
+        single biggest cut, collapsing near-identical pages.</p>
       </div></div>
       <div class="step" data-step="4"><div class="step-inner">
         <h3>Apply C4-style filters</h3>
@@ -118,7 +118,7 @@
       <div class="step" data-step="6"><div class="step-inner">
         <h3>15 trillion clean tokens</h3>
         <p>What remains is FineWeb: about <b data-stat="final_tokens">15T</b> high-quality English
-        tokens — roughly <b data-stat="removed_pct">85%</b> of the raw crawl was thrown away.
+        tokens; roughly <b data-stat="removed_pct">85%</b> of the raw crawl was discarded.
         <span class="muted">Hover any stage to see what it removes.</span></p>
       </div></div>
     </div>
@@ -135,22 +135,22 @@
       <div class="section-tag"><span class="num">02</span> Document length</div>
       <div class="step" data-step="0"><div class="step-inner">
         <h3>How long is a web page?</h3>
-        <p>Each document is measured in GPT-2 tokens. Most pages are short — the histogram
+        <p>Each document is measured in GPT-2 tokens. Most pages are short, so the histogram
         piles up near the left.</p>
       </div></div>
       <div class="step" data-step="1"><div class="step-inner">
         <h3>The typical page is tiny</h3>
-        <p>The median document is only about <b data-stat="median_tokens">340</b> tokens —
+        <p>The median document is only about <b data-stat="median_tokens">340</b> tokens,
         a few short paragraphs. Half of the web is shorter than this.</p>
       </div></div>
       <div class="step" data-step="2"><div class="step-inner">
         <h3>Switch to a log scale</h3>
-        <p>On a logarithmic axis the distribution becomes a clean bell — document length
+        <p>On a logarithmic axis the distribution becomes a clean bell: document length
         is roughly <b>log-normal</b>, a signature of organic web content.</p>
       </div></div>
       <div class="step" data-step="3"><div class="step-inner">
         <h3>A heavy tail</h3>
-        <p>A small number of pages are enormous — thousands of tokens long. These few
+        <p>A small number of pages are enormous, thousands of tokens long. These few
         giants (highlighted) carry a disproportionate share of the text.</p>
       </div></div>
     </div>
@@ -177,7 +177,7 @@
       </div></div>
       <div class="step" data-step="2"><div class="step-inner">
         <h3>The murky middle</h3>
-        <p>The tail below 0.95 (highlighted) is the interesting part — code-heavy pages,
+        <p>The tail below 0.95 (highlighted) is the interesting part: code-heavy pages,
         multilingual fragments and borderline text that slipped past the threshold.</p>
       </div></div>
     </div>
@@ -194,13 +194,13 @@
       <div class="section-tag"><span class="num">04</span> The web through time</div>
       <div class="step" data-step="0"><div class="step-inner">
         <h3>Recent years dominate</h3>
-        <p>FineWeb spans <span data-stat="year_min">2013</span>–<span data-stat="year_max">2024</span>,
+        <p>FineWeb spans <span data-stat="year_min">2013</span> to <span data-stat="year_max">2024</span>,
         but it is not evenly spread. The web grew, more snapshots were kept, and recent
         years contribute far more documents.</p>
       </div></div>
       <div class="step" data-step="1"><div class="step-inner">
         <h3>…and far more tokens</h3>
-        <p>Measured in tokens, the recency bias is even stronger. Switch the metric — the
+        <p>Measured in tokens, the recency bias is even stronger. Switch the metric, and the
         last few years hold most of the text.</p>
       </div></div>
       <div class="step" data-step="2"><div class="step-inner">
@@ -232,7 +232,7 @@
       </div></div>
       <div class="step" data-step="2"><div class="step-inner">
         <h3>Now size by tokens</h3>
-        <p>Re-sizing by total tokens reshuffles the galaxy — some domains have few but
+        <p>Re-sizing by total tokens reshuffles the galaxy, because some domains have few but
         very long documents.</p>
       </div></div>
       <div class="step" data-step="3"><div class="step-inner">
@@ -292,7 +292,7 @@
       </div></div>
       <div class="step" data-step="2"><div class="step-inner">
         <h3>Short pages are uncertain</h3>
-        <p>The shortest-document column spreads across more score bins — with little text,
+        <p>The shortest-document column spreads across more score bins, because with little text,
         the classifier has less signal to judge.</p>
       </div></div>
     </div>
@@ -310,14 +310,14 @@
       <p>
         FineWeb is the invisible substrate of modern AI. Decanting it reveals a corpus that
         is short, overwhelmingly recent, dominated by a small number of domains, and
-        ruthlessly filtered — yet still vast and diverse.
+        ruthlessly filtered, yet still vast and diverse.
       </p>
       <div class="cards">
         <div class="card"><span class="c-ico">⏳</span><h4>85% is discarded</h4>
           <p>Of <span data-stat="raw_tokens">100T</span> raw tokens, only
-          <span data-stat="final_tokens">15T</span> survive — dedup is the biggest cut.</p></div>
+          <span data-stat="final_tokens">15T</span> survive; deduplication is the biggest cut.</p></div>
         <div class="card"><span class="c-ico">📄</span><h4>The median page is tiny</h4>
-          <p>About <span data-stat="median_tokens">340</span> tokens — a few short paragraphs —
+          <p>About <span data-stat="median_tokens">340</span> tokens, a few short paragraphs,
           with a heavy log-normal tail.</p></div>
         <div class="card"><span class="c-ico">🌐</span><h4>Concentrated source</h4>
           <p>A Gini of <span data-stat="gini">0.57</span>; only
@@ -328,7 +328,7 @@
       </div>
       <p class="closer">
         The next time a model answers you, remember: it learned to speak from a distilled,
-        filtered, deduplicated echo of the open web — and this is its shape.
+        filtered, deduplicated echo of the open web, and this is its shape.
       </p>
     </div>
 
