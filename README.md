@@ -10,7 +10,7 @@ An interactive, scroll-driven **D3.js** data story about [**FineWeb**](https://h
 | | |
 |---|---|
 | 🔗 **Live demo** | [com-480-data-visualization.github.io/FineWeb_Alireza](https://com-480-data-visualization.github.io/FineWeb_Alireza/) _(enable GitHub Pages to activate)_ |
-| 🎥 **Screencast** | _replace with your video link_ (see [`screencast/`](screencast/)) |
+| 🎥 **Screencast** | [▶ Watch the 2-minute video](https://drive.google.com/file/d/1bBN4NYmE1X15sft0V5nxJhfG020pXn0W/view?usp=sharing) · [script](screencast/script.md) |
 | 📖 **Process book** | [`process-book/process-book.pdf`](process-book/process-book.pdf) |
 | 📊 **Dataset** | HuggingFace `HuggingFaceFW/fineweb` · `sample-10BT` |
 | 💻 **Repository** | [com-480-data-visualization/FineWeb_Alireza](https://github.com/com-480-data-visualization/FineWeb_Alireza) |
