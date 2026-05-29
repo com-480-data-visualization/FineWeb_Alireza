@@ -9,10 +9,12 @@ An interactive, scroll-driven **D3.js** data story about [**FineWeb**](https://h
 
 | | |
 |---|---|
-| 🔗 **Live demo** | _replace with your GitHub Pages URL, e.g._ `https://<user>.github.io/<repo>/` |
+| 🔗 **Live demo** | [com-480-data-visualization.github.io/FineWeb_Alireza](https://com-480-data-visualization.github.io/FineWeb_Alireza/) _(enable GitHub Pages to activate)_ |
 | 🎥 **Screencast** | _replace with your video link_ (see [`screencast/`](screencast/)) |
 | 📖 **Process book** | [`process-book/process-book.pdf`](process-book/process-book.pdf) |
 | 📊 **Dataset** | HuggingFace `HuggingFaceFW/fineweb` · `sample-10BT` |
+| 💻 **Repository** | [com-480-data-visualization/FineWeb_Alireza](https://github.com/com-480-data-visualization/FineWeb_Alireza) |
+| 👤 **Author** | Alireza Abdollahpoorrostam · SCIPER 380830 |
 
 ---
 
@@ -56,7 +58,7 @@ The repo is static, so hosting is trivial:
 
 1. Push to GitHub.
 2. **Settings → Pages → Build and deployment → Source: _Deploy from a branch_**, branch `main`, folder `/ (root)`.
-3. Your site goes live at `https://<user>.github.io/<repo>/`.
+3. Your site goes live at `https://com-480-data-visualization.github.io/FineWeb_Alireza/`.
 
 No secrets, no server, no CI required.
 
@@ -150,6 +152,6 @@ This needs a network connection and a few minutes; memory stays O(1) thanks to s
 
 - Dataset: **FineWeb** (Penedo et al., *The FineWeb Datasets: Decanting the Web for the Finest Text Data at Scale*, NeurIPS 2024), CC-licensed by Hugging Face.
 - Built for EPFL **COM-480 Data Visualization**.
-- Team: **[Member 1] · [Member 2] · [Member 3]** _(replace with your team)_.
+- Author: **Alireza Abdollahpoorrostam** (SCIPER 380830) — individual submission.
 
 Code released under the MIT License (see `LICENSE`).
