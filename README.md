@@ -1,5 +1,7 @@
 # Decanting the Web: Inside FineWeb 🌐
 
+> **Why FineWeb?** The main reason I wanted to review FineWeb closely is because of an emerging problem in LLM training known as the ["Data-Wall"](https://arxiv.org/pdf/2211.04325), which essentially means we are rapidly running out of high-quality, public human text.
+
 An interactive, scroll-driven **D3.js** data story about [**FineWeb**](https://huggingface.co/datasets/HuggingFaceFW/fineweb), the 15-trillion-token English dataset used to pre-train modern large language models. It follows the data from the raw Common Crawl, through the curation funnel, to the shape of what survives.
 
 > **COM-480 Data Visualization · EPFL · Milestone 3**
