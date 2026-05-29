@@ -155,3 +155,13 @@ This needs a network connection and a few minutes; memory stays O(1) thanks to s
 - Author: **Alireza Abdollahpoorrostam** (SCIPER 380830) — individual submission.
 
 Code released under the MIT License (see `LICENSE`).
+
+---
+
+## Acknowledgments
+
+[![Built with Claude Code](https://img.shields.io/badge/Built%20with-Claude%20Code-D97757?logo=anthropic&logoColor=white)](https://claude.com/claude-code)
+
+Parts of the implementation and writing were done with the help of
+Anthropic's Claude (Claude Code). All design decisions, review, and final
+authorship are my own.
