@@ -1,0 +1,24 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# Notebook checkpoints
+.ipynb_checkpoints/
+
+# Scratch / build
+_nb_content.txt
+*.log
+node_modules/
+
+# Large local data exports (the small aggregates in data/*.json ARE committed)
+data/raw/
+*.parquet

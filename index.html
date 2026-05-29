@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Decanting the Web · Inside FineWeb</title>
+  <meta name="description" content="An interactive data story about FineWeb — how 100 trillion tokens of raw web text are distilled into 15 trillion tokens of LLM training data. COM-480 Data Visualization, EPFL." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+
+  <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+  <script type="module" src="js/main.js"></script>
+</head>
+<body>
+  <!-- loader -->
+  <div id="loader"><div class="spinner"></div><p>Decanting the web…</p></div>
+
+  <!-- scroll progress -->
+  <div class="scroll-progress"></div>
+
+  <!-- section nav -->
+  <nav class="nav-dots" aria-label="Section navigation">
+    <button class="nav-dot is-active" data-target="top" title="Intro"></button>
+    <button class="nav-dot" data-target="funnel" title="The funnel"></button>
+    <button class="nav-dot" data-target="length" title="Document length"></button>
+    <button class="nav-dot" data-target="language" title="Language"></button>
+    <button class="nav-dot" data-target="time" title="Over time"></button>
+    <button class="nav-dot" data-target="domains" title="Domain galaxy"></button>
+    <button class="nav-dot" data-target="concentration" title="Concentration"></button>
+    <button class="nav-dot" data-target="quality" title="Quality"></button>
+    <button class="nav-dot" data-target="takeaways" title="Takeaways"></button>
+  </nav>
+
+  <!-- ───────────────────────── HERO ───────────────────────── -->
+  <header class="hero" id="top">
+    <div class="hero-bg"></div>
+    <div class="hero-inner">
+      <p class="eyebrow">COM-480 · Data Visualization · EPFL</p>
+      <h1>Decanting<br><span class="accent">the Web</span></h1>
+      <p class="hero-lead">
+        Every large language model is what it eats. Before a model can write, it must
+        read — and most of what it reads comes from <b>FineWeb</b>, a dataset distilled
+        from fifteen years of crawling the open internet.
+      </p>
+      <div class="hero-stat">
+        <div class="hs-block"><span class="hs-num" data-stat="raw_tokens">100T</span><span class="hs-lbl">raw web tokens</span></div>
+        <div class="hs-arrow">→</div>
+        <div class="hs-block"><span class="hs-num accent" data-stat="final_tokens">15T</span><span class="hs-lbl">make the cut</span></div>
+      </div>
+      <button class="cta" data-scroll-to="intro">Follow the journey ↓</button>
+    </div>
+  </header>
+
+  <!-- ───────────────────────── INTRO ───────────────────────── -->
+  <section class="intro" id="intro">
+    <div class="prose" data-reveal>
+      <h2>What is FineWeb?</h2>
+      <p>
+        <a href="https://huggingface.co/datasets/HuggingFaceFW/fineweb" target="_blank" rel="noopener">FineWeb</a>
+        is a 15-trillion-token English dataset released by Hugging Face, built by
+        carefully filtering <b>96 snapshots</b> of <a href="https://commoncrawl.org" target="_blank" rel="noopener">Common Crawl</a>.
+        It is one of the cleanest large-scale corpora used to pre-train modern LLMs.
+      </p>
+      <p>
+        We explored the public <code>sample-10BT</code> subset by streaming
+        <b><span data-stat="sample_docs">200,000</span> documents</b> and measuring them.
+        This is the story those measurements tell — from the raw crawl, through the
+        filtering funnel, to the shape of what survives.
+      </p>
+      <div class="stat-strip">
+        <div><b data-stat="sample_docs">200,000</b><span>documents sampled</span></div>
+        <div><b data-stat="n_dumps">96</b><span>Common-Crawl snapshots</span></div>
+        <div><b data-stat="n_unique_domains">70,000</b><span>unique domains</span></div>
+        <div><b><span data-stat="year_min">2013</span>–<span data-stat="year_max">2024</span></b><span>years of the web</span></div>
+      </div>
+      <p class="hint">Scroll to begin ↓</p>
+    </div>
+  </section>
+
+  <!-- ───────────────────────── 1 · FUNNEL ───────────────────────── -->
+  <section class="scrolly section" id="funnel" data-chart="funnel">
+    <div class="steps">
+      <div class="section-tag"><span class="num">01</span> The Funnel</div>
+      <div class="step" data-step="0"><div class="step-inner">
+        <h3>It begins with the whole web</h3>
+        <p>Common Crawl has archived the public internet since 2013 — <b data-stat="n_dumps">96</b>
+        monthly snapshots of raw HTML in every language. That's roughly
+        <b data-stat="raw_tokens">100T</b> tokens of unfiltered noise.</p>
+      </div></div>
+      <div class="step" data-step="1"><div class="step-inner">
+        <h3>Pull out the text</h3>
+        <p>The <code>trafilatura</code> extractor strips menus, ads and markup, keeping only
+        the main article text. Nearly half the volume disappears here.</p>
+      </div></div>
+      <div class="step" data-step="2"><div class="step-inner">
+        <h3>Keep only good English</h3>
+        <p>A URL block-list, a <b>fastText</b> language classifier (English score ≥ 0.65)
+        and MassiveText quality rules remove non-English and obvious junk.</p>
+      </div></div>
+      <div class="step" data-step="3"><div class="step-inner">
+        <h3>Remove the duplicates</h3>
+        <p>The web repeats itself endlessly. Per-snapshot <b>MinHash</b> de-duplication is the
+        single biggest cut — collapsing near-identical pages.</p>
+      </div></div>
+      <div class="step" data-step="4"><div class="step-inner">
+        <h3>Apply C4-style filters</h3>
+        <p>Heuristics from Google's C4 dataset drop lines without real sentence structure
+        (e.g. missing terminal punctuation).</p>
+      </div></div>
+      <div class="step" data-step="5"><div class="step-inner">
+        <h3>FineWeb's own heuristics</h3>
+        <p>A final set of custom line-length and repetition filters removes list-spam and
+        boilerplate the earlier stages missed.</p>
+      </div></div>
+      <div class="step" data-step="6"><div class="step-inner">
+        <h3>15 trillion clean tokens</h3>
+        <p>What remains is FineWeb: about <b data-stat="final_tokens">15T</b> high-quality English
+        tokens — roughly <b data-stat="removed_pct">85%</b> of the raw crawl was thrown away.
+        <span class="muted">Hover any stage to see what it removes.</span></p>
+      </div></div>
+    </div>
+    <div class="sticky"><div class="chart-card">
+      <div class="chart-head"><h4>The FineWeb curation pipeline</h4>
+        <p class="chart-sub">Token volume surviving each filtering stage (trillions)</p></div>
+      <div class="chart-holder"></div>
+    </div></div>
+  </section>
+
+  <!-- ───────────────────────── 2 · LENGTH ───────────────────────── -->
+  <section class="scrolly section" id="length" data-chart="distribution">
+    <div class="steps">
+      <div class="section-tag"><span class="num">02</span> Document length</div>
+      <div class="step" data-step="0"><div class="step-inner">
+        <h3>How long is a web page?</h3>
+        <p>Each document is measured in GPT-2 tokens. Most pages are short — the histogram
+        piles up near the left.</p>
+      </div></div>
+      <div class="step" data-step="1"><div class="step-inner">
+        <h3>The typical page is tiny</h3>
+        <p>The median document is only about <b data-stat="median_tokens">340</b> tokens —
+        a few short paragraphs. Half of the web is shorter than this.</p>
+      </div></div>
+      <div class="step" data-step="2"><div class="step-inner">
+        <h3>Switch to a log scale</h3>
+        <p>On a logarithmic axis the distribution becomes a clean bell — document length
+        is roughly <b>log-normal</b>, a signature of organic web content.</p>
+      </div></div>
+      <div class="step" data-step="3"><div class="step-inner">
+        <h3>A heavy tail</h3>
+        <p>A small number of pages are enormous — thousands of tokens long. These few
+        giants (highlighted) carry a disproportionate share of the text.</p>
+      </div></div>
+    </div>
+    <div class="sticky"><div class="chart-card">
+      <div class="chart-head"><h4>Token-count distribution</h4>
+        <p class="chart-sub">Documents by length · toggle the scale yourself</p></div>
+      <div class="chart-holder"></div>
+    </div></div>
+  </section>
+
+  <!-- ───────────────────────── 3 · LANGUAGE ───────────────────────── -->
+  <section class="scrolly section" id="language" data-chart="language">
+    <div class="steps">
+      <div class="section-tag"><span class="num">03</span> Is it really English?</div>
+      <div class="step" data-step="0"><div class="step-inner">
+        <h3>Every page gets a score</h3>
+        <p>A fastText classifier rates how confidently English each page is, from 0 to 1.
+        FineWeb keeps only pages scoring at least <b>0.65</b>.</p>
+      </div></div>
+      <div class="step" data-step="1"><div class="step-inner">
+        <h3>Overwhelmingly confident</h3>
+        <p><b data-stat="frac95">92%</b> of surviving documents score ≥ 0.95. The filter is
+        permissive, yet what remains is almost entirely clear English.</p>
+      </div></div>
+      <div class="step" data-step="2"><div class="step-inner">
+        <h3>The murky middle</h3>
+        <p>The tail below 0.95 (highlighted) is the interesting part — code-heavy pages,
+        multilingual fragments and borderline text that slipped past the threshold.</p>
+      </div></div>
+    </div>
+    <div class="sticky"><div class="chart-card">
+      <div class="chart-head"><h4>fastText language-score distribution</h4>
+        <p class="chart-sub">How confidently English is each document?</p></div>
+      <div class="chart-holder"></div>
+    </div></div>
+  </section>
+
+  <!-- ───────────────────────── 4 · TIME ───────────────────────── -->
+  <section class="scrolly section" id="time" data-chart="temporal">
+    <div class="steps">
+      <div class="section-tag"><span class="num">04</span> The web through time</div>
+      <div class="step" data-step="0"><div class="step-inner">
+        <h3>Recent years dominate</h3>
+        <p>FineWeb spans <span data-stat="year_min">2013</span>–<span data-stat="year_max">2024</span>,
+        but it is not evenly spread. The web grew, more snapshots were kept, and recent
+        years contribute far more documents.</p>
+      </div></div>
+      <div class="step" data-step="1"><div class="step-inner">
+        <h3>…and far more tokens</h3>
+        <p>Measured in tokens, the recency bias is even stronger. Switch the metric — the
+        last few years hold most of the text.</p>
+      </div></div>
+      <div class="step" data-step="2"><div class="step-inner">
+        <h3>All 96 snapshots</h3>
+        <p>Zoom in to every individual Common-Crawl dump, coloured from oldest to newest.
+        <span class="muted">Use the buttons to explore any metric and granularity.</span></p>
+      </div></div>
+    </div>
+    <div class="sticky"><div class="chart-card">
+      <div class="chart-head"><h4>Volume across crawl time</h4>
+        <p class="chart-sub">Documents · tokens · length, by year or snapshot</p></div>
+      <div class="chart-holder"></div>
+    </div></div>
+  </section>
+
+  <!-- ───────────────────────── 5 · DOMAINS ───────────────────────── -->
+  <section class="scrolly section" id="domains" data-chart="galaxy">
+    <div class="steps">
+      <div class="section-tag"><span class="num">05</span> The domain galaxy</div>
+      <div class="step" data-step="0"><div class="step-inner">
+        <h3>Where does the text come from?</h3>
+        <p>Each bubble is one of the web's most-crawled domains, sized by how many
+        documents it contributes.</p>
+      </div></div>
+      <div class="step" data-step="1"><div class="step-inner">
+        <h3>Many kinds of sites</h3>
+        <p>Colour reveals the mix: reference and wikis, news, blogs and CMS platforms,
+        software, government and academia. <span class="muted">Click a legend swatch to isolate one.</span></p>
+      </div></div>
+      <div class="step" data-step="2"><div class="step-inner">
+        <h3>Now size by tokens</h3>
+        <p>Re-sizing by total tokens reshuffles the galaxy — some domains have few but
+        very long documents.</p>
+      </div></div>
+      <div class="step" data-step="3"><div class="step-inner">
+        <h3>A long, long tail</h3>
+        <p>These giants are the exception. The full sample spans
+        <b data-stat="n_unique_domains">70,000</b> distinct domains.
+        <span class="muted">Search any domain to find it.</span></p>
+      </div></div>
+    </div>
+    <div class="sticky"><div class="chart-card">
+      <div class="chart-head"><h4>Top domains, as a star field</h4>
+        <p class="chart-sub">Size = volume · colour = category · search & filter</p></div>
+      <div class="chart-holder"></div>
+    </div></div>
+  </section>
+
+  <!-- ───────────────────────── 6 · CONCENTRATION ───────────────────────── -->
+  <section class="scrolly section" id="concentration" data-chart="concentration">
+    <div class="steps">
+      <div class="section-tag"><span class="num">06</span> A few rule them all</div>
+      <div class="step" data-step="0"><div class="step-inner">
+        <h3>How unequal is the web?</h3>
+        <p>The Lorenz curve plots cumulative documents against cumulative domains. The
+        further it bows from the diagonal, the more concentrated the data.</p>
+      </div></div>
+      <div class="step" data-step="1"><div class="step-inner">
+        <h3>A Gini of <span data-stat="gini">0.57</span></h3>
+        <p>Most domains contribute a single page; a minority contribute thousands.
+        <span class="muted">Hover the curve to read any share.</span></p>
+      </div></div>
+      <div class="step" data-step="2"><div class="step-inner">
+        <h3>Just a few hundred sites</h3>
+        <p>Counted in tokens it is even starker: only <b data-stat="cov25">300</b> domains
+        supply a quarter of all text, and <b data-stat="cov50">3,900</b> supply half.</p>
+      </div></div>
+    </div>
+    <div class="sticky"><div class="chart-card">
+      <div class="chart-head"><h4>Domain concentration</h4>
+        <p class="chart-sub">Lorenz curve & cumulative token coverage</p></div>
+      <div class="chart-holder"></div>
+    </div></div>
+  </section>
+
+  <!-- ───────────────────────── 7 · QUALITY ───────────────────────── -->
+  <section class="scrolly section" id="quality" data-chart="quality">
+    <div class="steps">
+      <div class="section-tag"><span class="num">07</span> The quality landscape</div>
+      <div class="step" data-step="0"><div class="step-inner">
+        <h3>Length × confidence</h3>
+        <p>Crossing language score with document length shows where FineWeb's documents
+        actually live. Warmer cells hold more documents.</p>
+      </div></div>
+      <div class="step" data-step="1"><div class="step-inner">
+        <h3>The sweet spot</h3>
+        <p>The dataset is dominated by one region: confident English (score ≥ 0.95) of
+        medium length. This is the heart of the corpus.</p>
+      </div></div>
+      <div class="step" data-step="2"><div class="step-inner">
+        <h3>Short pages are uncertain</h3>
+        <p>The shortest-document column spreads across more score bins — with little text,
+        the classifier has less signal to judge.</p>
+      </div></div>
+    </div>
+    <div class="sticky"><div class="chart-card">
+      <div class="chart-head"><h4>Language score × token count</h4>
+        <p class="chart-sub">Document counts across the quality grid</p></div>
+      <div class="chart-holder"></div>
+    </div></div>
+  </section>
+
+  <!-- ───────────────────────── OUTRO ───────────────────────── -->
+  <section class="outro" id="takeaways">
+    <div class="prose" data-reveal>
+      <h2>What the web becomes</h2>
+      <p>
+        FineWeb is the invisible substrate of modern AI. Decanting it reveals a corpus that
+        is short, overwhelmingly recent, dominated by a small number of domains, and
+        ruthlessly filtered — yet still vast and diverse.
+      </p>
+      <div class="cards">
+        <div class="card"><span class="c-ico">⏳</span><h4>85% is discarded</h4>
+          <p>Of <span data-stat="raw_tokens">100T</span> raw tokens, only
+          <span data-stat="final_tokens">15T</span> survive — dedup is the biggest cut.</p></div>
+        <div class="card"><span class="c-ico">📄</span><h4>The median page is tiny</h4>
+          <p>About <span data-stat="median_tokens">340</span> tokens — a few short paragraphs —
+          with a heavy log-normal tail.</p></div>
+        <div class="card"><span class="c-ico">🌐</span><h4>Concentrated source</h4>
+          <p>A Gini of <span data-stat="gini">0.57</span>; only
+          <span data-stat="cov25">300</span> domains supply a quarter of all tokens.</p></div>
+        <div class="card"><span class="c-ico">✅</span><h4>Confidently English</h4>
+          <p><span data-stat="frac95">92%</span> of documents score ≥ 0.95 on the fastText
+          English classifier.</p></div>
+      </div>
+      <p class="closer">
+        The next time a model answers you, remember: it learned to speak from a distilled,
+        filtered, deduplicated echo of the open web — and this is its shape.
+      </p>
+    </div>
+
+    <footer class="credits" data-reveal>
+      <div class="credit-col">
+        <h5>About</h5>
+        <p>Final project for <b>COM-480 Data Visualization</b>, EPFL. Built on the
+        Milestone-1 exploratory analysis of FineWeb.</p>
+      </div>
+      <div class="credit-col">
+        <h5>Data &amp; sources</h5>
+        <p>
+          <a href="https://huggingface.co/datasets/HuggingFaceFW/fineweb" target="_blank" rel="noopener">FineWeb dataset ↗</a><br>
+          Penedo et al., <i>The FineWeb Datasets</i>, NeurIPS 2024<br>
+          <a href="FineWeb_EDA.ipynb" target="_blank">Milestone-1 EDA notebook ↗</a>
+        </p>
+      </div>
+      <div class="credit-col">
+        <h5>Team</h5>
+        <p>[Member 1] · [Member 2] · [Member 3]<br>
+        <span class="muted">replace with your team</span></p>
+      </div>
+      <div class="credit-col">
+        <h5>Code</h5>
+        <p><a href="https://github.com/your-org/your-repo" target="_blank" rel="noopener">GitHub repository ↗</a><br>
+        D3.js · vanilla ES modules<br>
+        <a href="process-book/process-book.html" target="_blank">Process book ↗</a></p>
+      </div>
+    </footer>
+    <p class="data-note">
+      Figures are computed from a <span data-stat="sample_docs">200,000</span>-document sample.
+      The site ships pre-computed aggregates faithful to the Milestone-1 EDA; run
+      <code>scripts/prepare_data.py</code> to regenerate them from the live FineWeb stream.
+    </p>
+  </section>
+</body>
+</html>

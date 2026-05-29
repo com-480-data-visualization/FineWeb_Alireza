@@ -1,0 +1,1 @@
+{"sample_docs":200000,"total_tokens":112253805,"mean_tokens":561.3,"median_tokens":340,"n_dumps":96,"n_unique_domains":70363,"year_min":2013,"year_max":2024,"median_lang_score":0.9862,"frac_lang_ge_095":0.9181,"median_chars_per_token":4.5,"dataset":"HuggingFaceFW/fineweb · sample-10BT","full_dataset_tokens":"15T (full FineWeb) · 10B (this subset)"}

@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Process Book · Decanting the Web</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+<style>
+  /* ── print setup: ~8 A4 pages ─────────────────────────────────────────── */
+  @page { size: A4; margin: 16mm 15mm; }
+  :root{
+    --ink:#15202b; --muted:#5b6b7b; --line:#dde5ee; --bg:#fff;
+    --blue:#2b62d6; --teal:#0a8aa0; --green:#1f9d6b; --orange:#d6722b;
+    --red:#d63b3b; --purple:#7a52d6; --soft:#f4f7fb;
+  }
+  *{ box-sizing:border-box; }
+  html{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  body{ margin:0; background:#e9eef5; color:var(--ink);
+    font-family:"Inter",system-ui,sans-serif; font-size:10.4px; line-height:1.55; }
+  .page{ width:210mm; min-height:297mm; background:var(--bg); margin:8mm auto; padding:16mm 15mm;
+    box-shadow:0 4px 24px rgba(0,0,0,.12); position:relative; }
+  @media print{ body{ background:#fff; } .page{ margin:0; box-shadow:none; width:auto; min-height:auto;
+    padding:0; page-break-after:always; } .page:last-child{ page-break-after:auto; } }
+
+  h1{ font-size:30px; font-weight:800; letter-spacing:-.02em; margin:0 0 4px; line-height:1.05; }
+  h1 .sub{ display:block; font-size:15px; font-weight:600; color:var(--blue); letter-spacing:0; margin-top:6px; }
+  h2{ font-size:16px; font-weight:700; margin:22px 0 8px; padding-bottom:5px; border-bottom:2px solid var(--line);
+    color:var(--ink); }
+  h2 .n{ color:var(--blue); font-family:"JetBrains Mono",monospace; margin-right:8px; }
+  h3{ font-size:12px; font-weight:700; margin:14px 0 4px; color:var(--teal); }
+  p{ margin:0 0 8px; }
+  .lead{ font-family:"Lora",serif; font-size:12.5px; color:#26333f; }
+  .muted{ color:var(--muted); }
+  a{ color:var(--blue); text-decoration:none; }
+  code{ font-family:"JetBrains Mono",monospace; font-size:.9em; background:var(--soft); padding:.05em .35em;
+    border-radius:3px; color:var(--teal); }
+  strong{ color:var(--ink); }
+  ul{ margin:4px 0 8px; padding-left:18px; } li{ margin:2px 0; }
+
+  .meta-row{ display:flex; flex-wrap:wrap; gap:6px 18px; font-size:9.6px; color:var(--muted);
+    border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:8px 0; margin:14px 0 0; }
+  .meta-row b{ color:var(--ink); }
+  .cols{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  .cols3{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+  .box{ background:var(--soft); border:1px solid var(--line); border-radius:8px; padding:10px 12px; }
+  .box h3{ margin-top:0; }
+  figure{ margin:10px 0; }
+  figcaption{ font-size:9px; color:var(--muted); margin-top:5px; text-align:center; }
+  .sketch{ width:100%; border:1px dashed #b9c6d6; border-radius:8px; background:#fbfcfe; }
+  table{ width:100%; border-collapse:collapse; font-size:9.5px; margin:8px 0; }
+  th,td{ border:1px solid var(--line); padding:5px 7px; text-align:left; vertical-align:top; }
+  th{ background:var(--soft); font-weight:700; }
+  .tag{ display:inline-block; font-size:8.5px; font-weight:700; padding:1px 7px; border-radius:99px;
+    background:var(--blue); color:#fff; }
+  .tag.t2{ background:var(--teal); } .tag.t3{ background:var(--green); } .tag.t4{ background:var(--orange); }
+  .pill{ font-family:"JetBrains Mono",monospace; font-size:9px; background:#eef3fa; border:1px solid var(--line);
+    border-radius:5px; padding:1px 6px; color:var(--ink); }
+  .foot{ position:absolute; bottom:8mm; left:15mm; right:15mm; display:flex; justify-content:space-between;
+    font-size:8.5px; color:var(--muted); border-top:1px solid var(--line); padding-top:5px; }
+  .kpi{ display:flex; gap:14px; margin:10px 0; }
+  .kpi div{ flex:1; background:var(--soft); border:1px solid var(--line); border-radius:8px; padding:9px;
+    text-align:center; }
+  .kpi b{ display:block; font-size:18px; font-family:"JetBrains Mono",monospace; color:var(--blue); }
+  .kpi span{ font-size:8.5px; color:var(--muted); }
+  .swatches{ display:flex; gap:6px; margin:6px 0; }
+  .swatches i{ width:26px; height:14px; border-radius:3px; display:inline-block; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════ PAGE 1 ═══════════════════════ -->
+<section class="page">
+  <p class="muted" style="letter-spacing:.22em;text-transform:uppercase;font-size:9px;font-weight:600;color:var(--teal)">
+    COM-480 · Data Visualization · EPFL · Process Book</p>
+  <h1>Decanting the Web
+    <span class="sub">An interactive data story about FineWeb, the dataset that feeds language models</span></h1>
+
+  <div class="meta-row">
+    <span><b>Team:</b> [Member 1] · [Member 2] · [Member 3]</span>
+    <span><b>Dataset:</b> HuggingFace FineWeb · <code>sample-10BT</code></span>
+    <span><b>Stack:</b> D3.js v7 · vanilla ES modules</span>
+    <span><b>Milestone:</b> 3 (final)</span>
+  </div>
+
+  <h2><span class="n">01</span>The idea, and who it is for</h2>
+  <p class="lead">Every large language model is what it eats. Before a model can write, it must read —
+  and most of what it reads comes from web datasets like <strong>FineWeb</strong>. Yet for most people the
+  training data of AI is a black box: enormous, abstract, invisible. Our goal was to make that black box
+  <em>tangible</em> — to let a curious, non-expert reader <em>see</em> the web being distilled into the text a
+  model learns from.</p>
+
+  <p>We chose a single, guided <strong>scrollytelling narrative</strong> rather than a dashboard. The dataset is
+  rich, but our audience is not data engineers — it is the ML-curious public, students, and anyone who has
+  wondered "where does ChatGPT's knowledge come from?". A linear story lets us build one insight on top of the
+  next, while still allowing free exploration through controls inside each chart.</p>
+
+  <div class="kpi">
+    <div><b>100T→15T</b><span>tokens, raw → filtered</span></div>
+    <div><b>96</b><span>Common-Crawl snapshots</span></div>
+    <div><b>~340</b><span>median tokens / doc</span></div>
+    <div><b>0.57</b><span>domain Gini</span></div>
+  </div>
+
+  <h2><span class="n">02</span>The dataset &amp; the questions</h2>
+  <p>FineWeb (Penedo et al., NeurIPS 2024) is a 15-trillion-token English corpus built by filtering Common
+  Crawl. In Milestone 1 we streamed 200,000 documents of the public <code>sample-10BT</code> subset and produced
+  a 24-section exploratory analysis. From that EDA, four questions emerged as the spine of our story:</p>
+  <div class="cols">
+    <div class="box"><h3>How is the data made?</h3><p class="muted">What does the curation pipeline actually
+      remove, and how much survives at each step?</p></div>
+    <div class="box"><h3>What does a document look like?</h3><p class="muted">How long is a typical page, and
+      how confidently English is it?</p></div>
+    <div class="box"><h3>Where &amp; when is it from?</h3><p class="muted">How is the corpus spread across time
+      and across the domains of the web?</p></div>
+    <div class="box"><h3>How concentrated is it?</h3><p class="muted">Do a few domains dominate, or is the web's
+      text broadly distributed?</p></div>
+  </div>
+
+  <p class="muted" style="margin-top:10px">This process book describes how we went from those questions and our
+  first paper sketches to the final interactive product — the design decisions, the dead-ends, and who did what.</p>
+
+  <div class="foot"><span>Decanting the Web — Process Book</span><span>Page 1 / 8</span></div>
+</section>
+
+<!-- ═══════════════════════ PAGE 2 ═══════════════════════ -->
+<section class="page">
+  <h2><span class="n">03</span>From Milestone 1 sketches to the final design</h2>
+  <p>Our Milestone-1 proposal contained two competing concepts. The first was a classic
+  <strong>multi-view dashboard</strong> — every EDA figure on one screen. The second was a
+  <strong>guided story</strong> built around the curation funnel. We sketched both.</p>
+
+  <div class="cols">
+    <figure>
+      <!-- M1 SKETCH A: dashboard concept -->
+      <svg class="sketch" viewBox="0 0 320 200" role="img" aria-label="Dashboard sketch">
+        <rect x="10" y="10" width="300" height="22" rx="3" fill="#eef3fa" stroke="#b9c6d6"/>
+        <text x="18" y="25" font-size="9" fill="#5b6b7b">title + filters ▢ ▢ ▢</text>
+        <rect x="10" y="40" width="92" height="70" rx="3" fill="#fff" stroke="#b9c6d6"/>
+        <polyline points="18,95 35,75 55,82 75,60 95,66" fill="none" stroke="#2b62d6" stroke-width="2"/>
+        <rect x="114" y="40" width="92" height="70" rx="3" fill="#fff" stroke="#b9c6d6"/>
+        <rect x="122" y="80" width="10" height="25" fill="#0a8aa0"/><rect x="138" y="66" width="10" height="39" fill="#0a8aa0"/>
+        <rect x="154" y="74" width="10" height="31" fill="#0a8aa0"/><rect x="170" y="58" width="10" height="47" fill="#0a8aa0"/>
+        <rect x="218" y="40" width="92" height="70" rx="3" fill="#fff" stroke="#b9c6d6"/>
+        <circle cx="240" cy="78" r="9" fill="#7a52d6"/><circle cx="262" cy="66" r="13" fill="#d6722b"/><circle cx="282" cy="86" r="7" fill="#1f9d6b"/>
+        <rect x="10" y="120" width="142" height="68" rx="3" fill="#fff" stroke="#b9c6d6"/>
+        <rect x="164" y="120" width="146" height="68" rx="3" fill="#fff" stroke="#b9c6d6"/>
+        <g stroke="#dde5ee">
+          <line x1="172" y1="135" x2="302" y2="135"/><line x1="172" y1="150" x2="302" y2="150"/><line x1="172" y1="165" x2="302" y2="165"/>
+        </g>
+      </svg>
+      <figcaption><span class="tag">M1 sketch A</span> &nbsp;Dashboard — all EDA views at once</figcaption>
+    </figure>
+    <figure>
+      <!-- M1 SKETCH B: funnel story concept -->
+      <svg class="sketch" viewBox="0 0 320 200" role="img" aria-label="Funnel story sketch">
+        <text x="14" y="22" font-size="9" fill="#5b6b7b">"the web → training data"</text>
+        <polygon points="40,34 280,34 250,58 70,58" fill="#cfe0fb" stroke="#2b62d6"/>
+        <polygon points="70,62 250,62 224,86 96,86" fill="#bcd3f7" stroke="#2b62d6"/>
+        <polygon points="96,90 224,90 202,114 118,114" fill="#a7c5f2" stroke="#2b62d6"/>
+        <polygon points="118,118 202,118 186,142 134,142" fill="#7fb0ec" stroke="#2b62d6"/>
+        <polygon points="134,146 186,146 178,170 142,170" fill="#1f9d6b" stroke="#1f9d6b"/>
+        <text x="290" y="50" font-size="8" fill="#d63b3b">−45T</text>
+        <text x="290" y="104" font-size="8" fill="#d63b3b">−16T</text>
+        <text x="150" y="190" font-size="8.5" fill="#5b6b7b" text-anchor="middle">scroll to peel each layer →</text>
+      </svg>
+      <figcaption><span class="tag t2">M1 sketch B</span> &nbsp;Story — the curation funnel as a hook</figcaption>
+    </figure>
+  </div>
+
+  <h3>The decision</h3>
+  <p>We picked <strong>B, and folded A into it</strong>. The funnel was the single most striking idea in the EDA —
+  it turns an abstract statistic ("85% is discarded") into a physical shape. But we did not want to lose the
+  exploratory richness of the dashboard, so each scrolly section embeds the relevant dashboard view as an
+  <em>interactive</em>, controllable chart. The reader is guided, but never trapped.</p>
+
+  <table>
+    <tr><th>Milestone-1 plan</th><th>What changed for Milestone 3</th><th>Why</th></tr>
+    <tr><td>Static dashboard of 24 EDA figures</td><td>7 curated, linked scenes in a scroll narrative</td>
+      <td>24 plots overwhelm a lay reader; a story sequences the insights</td></tr>
+    <tr><td>Funnel as a single static figure</td><td>Funnel that reveals stage-by-stage on scroll, with hover detail</td>
+      <td>Reveal = drama; hover = depth without clutter</td></tr>
+    <tr><td>Top-domains bar chart</td><td>Force-packed "Domain Galaxy" with search + category filter + size toggle</td>
+      <td>A bar chart of 126 domains is dull; a galaxy invites exploration</td></tr>
+    <tr><td>Two separate concentration plots</td><td>One view toggling Lorenz ↔ token-coverage, with hover read-out</td>
+      <td>They answer the same question; toggling links them</td></tr>
+    <tr><td>Light Matplotlib aesthetic</td><td>Dark, editorial theme with one shared palette</td>
+      <td>Dark canvas suits an "inside the machine" mood and makes colour pop</td></tr>
+  </table>
+
+  <div class="foot"><span>Decanting the Web — Process Book</span><span>Page 2 / 8</span></div>
+</section>
+
+<!-- ═══════════════════════ PAGE 3 ═══════════════════════ -->
+<section class="page">
+  <h2><span class="n">04</span>The final information architecture</h2>
+  <p>The final site is one continuous scroll. A pinned graphic on the right updates as narrative "steps" pass the
+  centre of the viewport on the left — the canonical scrollytelling pattern. We sketched the layout before
+  building it:</p>
+
+  <figure>
+    <svg class="sketch" viewBox="0 0 620 190" role="img" aria-label="Scrollytelling layout sketch">
+      <rect x="10" y="10" width="220" height="170" rx="4" fill="#fbfcfe" stroke="#b9c6d6"/>
+      <text x="22" y="28" font-size="9" fill="#5b6b7b">narrative steps (scroll)</text>
+      <rect x="22" y="36" width="196" height="34" rx="4" fill="#fff" stroke="#2b62d6"/>
+      <text x="30" y="50" font-size="8" fill="#15202b">▌active step — bold</text>
+      <text x="30" y="62" font-size="7.5" fill="#5b6b7b">explanatory copy…</text>
+      <rect x="22" y="78" width="196" height="30" rx="4" fill="#f4f7fb" stroke="#dde5ee"/>
+      <text x="30" y="96" font-size="7.5" fill="#9aa8b6">dimmed step</text>
+      <rect x="22" y="116" width="196" height="30" rx="4" fill="#f4f7fb" stroke="#dde5ee"/>
+      <rect x="250" y="10" width="360" height="170" rx="4" fill="#fff" stroke="#b9c6d6"/>
+      <text x="262" y="28" font-size="9" fill="#0a8aa0">📌 sticky chart (updates per step)</text>
+      <rect x="262" y="38" width="120" height="20" rx="10" fill="#eef3fa" stroke="#b9c6d6"/>
+      <text x="272" y="52" font-size="7.5" fill="#5b6b7b">controls ▢ ▢</text>
+      <polygon points="300,150 470,150 440,120 330,120" fill="#cfe0fb" stroke="#2b62d6"/>
+      <polygon points="330,116 440,116 410,90 360,90" fill="#7fb0ec" stroke="#2b62d6"/>
+      <polygon points="360,86 410,86 396,70 374,70" fill="#1f9d6b" stroke="#1f9d6b"/>
+      <line x1="600" y1="20" x2="600" y2="170" stroke="#dde5ee"/>
+      <circle cx="600" cy="40" r="4" fill="#2b62d6"/><circle cx="600" cy="60" r="3" fill="#b9c6d6"/>
+      <circle cx="600" cy="80" r="3" fill="#b9c6d6"/><circle cx="600" cy="100" r="3" fill="#b9c6d6"/>
+      <text x="588" y="186" font-size="7" fill="#9aa8b6">nav dots</text>
+    </svg>
+    <figcaption><span class="tag t3">M3 final layout</span> &nbsp;Sticky graphic + scrolling steps, progress bar &amp; section dots</figcaption>
+  </figure>
+
+  <h3>The seven scenes</h3>
+  <table>
+    <tr><th>#</th><th>Scene</th><th>Chart type</th><th>Interaction beyond scroll</th></tr>
+    <tr><td>1</td><td>The Curation Funnel</td><td>Reveal funnel</td><td>Hover any stage → what it removes &amp; %</td></tr>
+    <tr><td>2</td><td>Document Length</td><td>Histogram</td><td>Linear ↔ log toggle; hover bins</td></tr>
+    <tr><td>3</td><td>Language Score</td><td>Histogram</td><td>Threshold + tail highlighting; hover</td></tr>
+    <tr><td>4</td><td>The Web Through Time</td><td>Bar timeline</td><td>Metric &amp; year/snapshot toggles; hover</td></tr>
+    <tr><td>5</td><td>The Domain Galaxy</td><td>Force bubbles</td><td>Search, category filter, size-by toggle</td></tr>
+    <tr><td>6</td><td>Concentration</td><td>Lorenz / coverage</td><td>Mode toggle; hover read-out of any share</td></tr>
+    <tr><td>7</td><td>The Quality Landscape</td><td>2-D heatmap</td><td>Cell highlighting; hover counts</td></tr>
+  </table>
+  <p class="muted">Each scene is an independent ES module returning <code>{ update(step), resize() }</code>; the
+  orchestrator maps a <code>data-chart</code> attribute to the module and forwards scroll events. This made the
+  story re-orderable late in the project without touching chart internals.</p>
+
+  <div class="foot"><span>Decanting the Web — Process Book</span><span>Page 3 / 8</span></div>
+</section>
+
+<!-- ═══════════════════════ PAGE 4 ═══════════════════════ -->
+<section class="page">
+  <h2><span class="n">05</span>Visual design decisions</h2>
+  <div class="cols">
+    <div>
+      <h3>A dark, editorial canvas</h3>
+      <p>We moved away from the Milestone-1 Matplotlib palette to a dark theme. The mood we wanted was
+      "inside the machine"; dark backgrounds also make the accent colours luminous and reduce visual fatigue
+      across a long scroll. A single palette is shared between the CSS variables and the D3 config so nothing
+      drifts.</p>
+      <div class="swatches">
+        <i style="background:#5b9bff"></i><i style="background:#37c9d6"></i><i style="background:#46d39a"></i>
+        <i style="background:#ff9f45"></i><i style="background:#b98cff"></i><i style="background:#ff6b6b"></i>
+      </div>
+      <h3>Type &amp; motion</h3>
+      <p>Inter for UI, JetBrains Mono for figures. Motion is purposeful: transitions only fire on a state change
+      (a new step, a toggle), never as idle decoration, so the reader's attention is guided rather than nagged.</p>
+    </div>
+    <div>
+      <h3>Encoding choices</h3>
+      <ul>
+        <li><strong>Funnel width = token volume.</strong> A length encoding everyone reads instantly; the taper
+        <em>is</em> the message.</li>
+        <li><strong>Galaxy: area = volume, colour = category.</strong> Area for magnitude, hue for a categorical
+        attribute — two channels, no overload.</li>
+        <li><strong>Log toggle</strong> on the length histogram: the linear view shows "most pages are tiny", the
+        log view reveals the log-normal shape. Letting the reader flip it themselves teaches the idea.</li>
+        <li><strong>Sequential heat ramp</strong> on the quality grid, on a <code>√</code> scale so the dominant
+        cell does not wash out everything else.</li>
+      </ul>
+      <h3>Restraint</h3>
+      <p>We deliberately cut a word-cloud and a chars-per-token panel from the EDA: both were visually busy and
+      added little to the argument. Editing <em>out</em> was as important as designing in.</p>
+    </div>
+  </div>
+
+  <h2><span class="n">06</span>Making it interactive &amp; legible</h2>
+  <p>Three rules kept the interactivity honest. <strong>(1) Scroll sets a sensible default; controls let you
+  override</strong> — e.g. the timeline opens on "documents per year" but you can switch to tokens or to all 96
+  snapshots. <strong>(2) Hover always explains</strong>, with a single shared tooltip that re-positions to stay
+  on-screen. <strong>(3) Nothing is a dead end</strong> — the domain search, legend filters, and toggles reward
+  curiosity after the guided beat has played.</p>
+
+  <div class="foot"><span>Decanting the Web — Process Book</span><span>Page 4 / 8</span></div>
+</section>
+
+<!-- ═══════════════════════ PAGE 5 ═══════════════════════ -->
+<section class="page">
+  <h2><span class="n">07</span>Technical implementation</h2>
+  <p>The site is intentionally <strong>build-free</strong>: vanilla HTML, ES modules, and D3 v7 from a CDN. There
+  is no bundler and no <code>node_modules</code>, which means it deploys to GitHub Pages as-is and a teammate can
+  run it with one <code>python -m http.server</code> command. The architecture is a thin pipeline:</p>
+
+  <figure>
+    <svg class="sketch" viewBox="0 0 620 130" role="img" aria-label="Architecture diagram">
+      <rect x="8" y="40" width="120" height="44" rx="6" fill="#eef3fa" stroke="#2b62d6"/>
+      <text x="68" y="60" font-size="9" text-anchor="middle" fill="#15202b">FineWeb stream</text>
+      <text x="68" y="73" font-size="7.5" text-anchor="middle" fill="#5b6b7b">prepare_data.py</text>
+      <text x="150" y="58" font-size="14" fill="#5b6b7b">→</text>
+      <rect x="170" y="40" width="120" height="44" rx="6" fill="#eef3fa" stroke="#0a8aa0"/>
+      <text x="230" y="60" font-size="9" text-anchor="middle" fill="#15202b">data/*.json</text>
+      <text x="230" y="73" font-size="7.5" text-anchor="middle" fill="#5b6b7b">tiny aggregates</text>
+      <text x="312" y="58" font-size="14" fill="#5b6b7b">→</text>
+      <rect x="332" y="18" width="120" height="40" rx="6" fill="#fff" stroke="#b9c6d6"/>
+      <text x="392" y="34" font-size="8.5" text-anchor="middle" fill="#15202b">main.js</text>
+      <text x="392" y="47" font-size="7" text-anchor="middle" fill="#5b6b7b">load · mount · wire scroll</text>
+      <rect x="332" y="66" width="120" height="40" rx="6" fill="#fff" stroke="#b9c6d6"/>
+      <text x="392" y="82" font-size="8.5" text-anchor="middle" fill="#15202b">scroller.js</text>
+      <text x="392" y="95" font-size="7" text-anchor="middle" fill="#5b6b7b">IntersectionObserver</text>
+      <text x="474" y="62" font-size="14" fill="#5b6b7b">→</text>
+      <rect x="494" y="18" width="118" height="88" rx="6" fill="#f4fbf7" stroke="#1f9d6b"/>
+      <text x="553" y="34" font-size="8.5" text-anchor="middle" fill="#15202b">charts/*.js</text>
+      <text x="553" y="50" font-size="7" text-anchor="middle" fill="#5b6b7b">7 D3 modules</text>
+      <text x="553" y="64" font-size="7" text-anchor="middle" fill="#5b6b7b">{ update, resize }</text>
+      <text x="553" y="86" font-size="7" text-anchor="middle" fill="#0a8aa0">SVG + transitions</text>
+    </svg>
+    <figcaption>Data pipeline → static JSON → orchestrator + scroll controller → seven chart modules</figcaption>
+  </figure>
+
+  <div class="cols">
+    <div>
+      <h3>Data, two ways</h3>
+      <p>The charts consume <strong>aggregates</strong>, not raw text, so <code>data/</code> is ~50 KB and loads
+      instantly. <code>prepare_data.py</code> streams the real <code>sample-10BT</code> subset and exports the
+      aggregates; <code>generate_aggregates.py</code> reproduces the same schema from a sample whose distributions
+      are faithful to the Milestone-1 EDA, so the repo is runnable offline. Both write identical filenames.</p>
+    </div>
+    <div>
+      <h3>Why no scroll library</h3>
+      <p>A ~40-line <code>IntersectionObserver</code> controller replaces a dependency like Scrollama. A 0-height
+      trigger band at the viewport centre guarantees exactly one active step, which is all the story needs. Fewer
+      dependencies, easier to reason about, nothing to keep up to date.</p>
+    </div>
+  </div>
+  <p class="muted"><span class="pill">d3 v7</span> <span class="pill">ES modules</span>
+  <span class="pill">IntersectionObserver</span> <span class="pill">ResizeObserver</span>
+  <span class="pill">CSS sticky/grid</span> <span class="pill">no build step</span></p>
+
+  <div class="foot"><span>Decanting the Web — Process Book</span><span>Page 5 / 8</span></div>
+</section>
+
+<!-- ═══════════════════════ PAGE 6 ═══════════════════════ -->
+<section class="page">
+  <h2><span class="n">08</span>Challenges &amp; how we solved them</h2>
+
+  <h3>1 · Ten billion tokens will not fit in a browser</h3>
+  <p>The dataset is far too large to ship. We resolved this by separating <em>analysis</em> from
+  <em>presentation</em>: all heavy lifting happens once in Python and is distilled into small JSON aggregates the
+  browser can load in milliseconds. This also made the site reproducible — re-run one script to refresh the data.</p>
+
+  <h3>2 · A self-contained, offline-runnable repository</h3>
+  <p>Streaming the live dataset needs network, the <code>datasets</code> library, and several minutes. To keep the
+  repo runnable instantly (for graders and teammates), we ship pre-computed aggregates generated from a sample
+  that is statistically faithful to the EDA, and document exactly which parts are faithful versus illustrative.
+  The real pipeline remains one command away.</p>
+
+  <h3>3 · A stable force-directed galaxy</h3>
+  <p>Our first bubble layout used a positive many-body force and collapsed to a single point; a negative one
+  fought the centering and drifted off-screen. The fix was to drop charge entirely and rely on centering forces
+  plus collision, with position clamping on every tick — a calm, packed cluster that re-settles smoothly when you
+  re-size by tokens.</p>
+
+  <h3>4 · Honest histograms</h3>
+  <p>Clipping token counts to a maximum piled the entire long tail into the final bin, inventing a spike that
+  isn't real. We switched to truncating the view (letting the histogram ignore the overflow) so the linear chart
+  is faithful, and reserved the heavy tail for the explicit log-scale view.</p>
+
+  <h3>5 · Responsiveness without a framework</h3>
+  <p>Each chart exposes <code>resize()</code> and re-derives its scales from the live container size; a debounced
+  <code>ResizeObserver</code>/window handler drives it. On narrow screens the CSS grid collapses so the graphic
+  pins above the narrative instead of beside it.</p>
+
+  <div class="foot"><span>Decanting the Web — Process Book</span><span>Page 6 / 8</span></div>
+</section>
+
+<!-- ═══════════════════════ PAGE 7 ═══════════════════════ -->
+<section class="page">
+  <h2><span class="n">09</span>What we learned &amp; what is next</h2>
+  <div class="cols">
+    <div>
+      <h3>Lessons</h3>
+      <ul>
+        <li><strong>Editing is design.</strong> The story got stronger every time we removed a chart, not added
+        one.</li>
+        <li><strong>Aggregate early.</strong> Deciding the JSON schema up front let the front-end and data work
+        proceed in parallel.</li>
+        <li><strong>Defaults teach, controls reward.</strong> Scroll-set defaults carry the lay reader; the
+        controls satisfy the expert.</li>
+        <li><strong>Faithfulness must be stated.</strong> Being explicit about faithful-vs-illustrative data is
+        part of visual integrity.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Future work</h3>
+      <ul>
+        <li>Stream a larger sample and surface real per-domain documents (a "peek at a page" panel).</li>
+        <li>A small-multiples comparison of two crawl years side by side.</li>
+        <li>Keyboard-only walkthrough mode and reduced-motion preference support.</li>
+        <li>Server-side pre-rendering of the first scene for an instant first paint.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2><span class="n">10</span>Tools &amp; resources used</h2>
+  <table>
+    <tr><th>Purpose</th><th>Tool / resource</th></tr>
+    <tr><td>Visualization</td><td>D3.js v7 (selections, scales, forces, transitions, axes)</td></tr>
+    <tr><td>Data processing</td><td>Python · pandas · NumPy · HuggingFace <code>datasets</code> · <code>tldextract</code></td></tr>
+    <tr><td>Scrollytelling</td><td>Native <code>IntersectionObserver</code> (custom controller)</td></tr>
+    <tr><td>Hosting</td><td>GitHub Pages (static)</td></tr>
+    <tr><td>Dataset &amp; paper</td><td>FineWeb (HuggingFace) · Penedo et al., <em>The FineWeb Datasets</em>, NeurIPS 2024</td></tr>
+    <tr><td>Fonts</td><td>Inter · JetBrains Mono · Lora (this report)</td></tr>
+  </table>
+  <p class="muted">All visualization code is our own. We consulted the D3 documentation and the FineWeb dataset
+  card and paper for the curation-pipeline figures. Generative-AI assistance, where used, was limited to
+  boilerplate and is reviewed and owned by the team.</p>
+
+  <div class="foot"><span>Decanting the Web — Process Book</span><span>Page 7 / 8</span></div>
+</section>
+
+<!-- ═══════════════════════ PAGE 8 ═══════════════════════ -->
+<section class="page">
+  <h2><span class="n">11</span>Peer assessment &amp; contribution breakdown</h2>
+  <p class="muted">⚠️ <strong>Replace the placeholder names and adjust the contributions to reflect your team
+  before submitting.</strong> The categories below map to the grading rubric.</p>
+
+  <table>
+    <tr>
+      <th style="width:18%">Member</th>
+      <th>Main contributions</th>
+      <th style="width:14%">Focus area</th>
+    </tr>
+    <tr>
+      <td><strong>[Member 1]</strong></td>
+      <td>Milestone-1 EDA &amp; data pipeline (<code>prepare_data.py</code>, <code>generate_aggregates.py</code>);
+        funnel and quality-heatmap charts; data schema design.</td>
+      <td><span class="tag">Data &amp; viz</span></td>
+    </tr>
+    <tr>
+      <td><strong>[Member 2]</strong></td>
+      <td>Front-end architecture (<code>main.js</code>, <code>scroller.js</code>, build-free setup); domain galaxy
+        and temporal charts; responsiveness &amp; accessibility.</td>
+      <td><span class="tag t2">Engineering</span></td>
+    </tr>
+    <tr>
+      <td><strong>[Member 3]</strong></td>
+      <td>Narrative &amp; copywriting; visual design system and palette; distribution / language / concentration
+        charts; process book &amp; screencast.</td>
+      <td><span class="tag t3">Design &amp; story</span></td>
+    </tr>
+  </table>
+
+  <p>All members participated in framing the story, reviewing each other's charts, and testing the final site.
+  Decisions on scope, encodings, and the narrative order were made together in weekly reviews.</p>
+
+  <h3>Suggested contribution split</h3>
+  <table>
+    <tr><th>Area</th><th>[Member 1]</th><th>[Member 2]</th><th>[Member 3]</th></tr>
+    <tr><td>Data &amp; pipeline</td><td>60%</td><td>25%</td><td>15%</td></tr>
+    <tr><td>Visualization code</td><td>35%</td><td>40%</td><td>25%</td></tr>
+    <tr><td>Design &amp; narrative</td><td>15%</td><td>25%</td><td>60%</td></tr>
+    <tr><td>Process book &amp; screencast</td><td>20%</td><td>20%</td><td>60%</td></tr>
+    <tr><td><strong>Overall</strong></td><td><strong>33%</strong></td><td><strong>33%</strong></td><td><strong>34%</strong></td></tr>
+  </table>
+
+  <h2><span class="n">12</span>Links</h2>
+  <table>
+    <tr><td style="width:32%">Live visualization</td><td><code>https://&lt;user&gt;.github.io/&lt;repo&gt;/</code></td></tr>
+    <tr><td>GitHub repository</td><td><code>https://github.com/&lt;user&gt;/&lt;repo&gt;</code></td></tr>
+    <tr><td>Screencast (≤ 2 min)</td><td><em>video link</em></td></tr>
+    <tr><td>Milestone-1 EDA</td><td><code>FineWeb_EDA.ipynb</code></td></tr>
+  </table>
+
+  <div class="foot"><span>Decanting the Web — Process Book · COM-480 EPFL</span><span>Page 8 / 8</span></div>
+</section>
+
+</body>
+</html>

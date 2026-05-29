@@ -1,0 +1,9 @@
+# Python dependencies for the data pipeline (the website itself needs nothing).
+#
+# scripts/generate_aggregates.py  → only needs numpy
+# scripts/prepare_data.py         → needs all of the below (streams real FineWeb)
+
+numpy>=1.20
+pandas>=1.2
+datasets>=2.18          # HuggingFace streaming
+tldextract>=3.4         # registered-domain / TLD extraction
