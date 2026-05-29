@@ -5,6 +5,8 @@ An interactive, scroll-driven **D3.js** data story about [**FineWeb**](https://h
 > **COM-480 Data Visualization — EPFL · Milestone 3**
 > Built on the Milestone-1 exploratory analysis ([`FineWeb_EDA.ipynb`](FineWeb_EDA.ipynb)).
 
+![Decanting the Web — the opening of the interactive data story](preview.png)
+
 | | |
 |---|---|
 | 🔗 **Live demo** | _replace with your GitHub Pages URL, e.g._ `https://<user>.github.io/<repo>/` |
